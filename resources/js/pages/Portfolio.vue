@@ -1,5 +1,6 @@
 <script setup>
 import PortfolioComposer from '../components/PortfolioComposer.vue';
+import PortfolioDocument from '../components/PortfolioDocument.vue';
 
 defineProps({
     portfolio: {
@@ -10,5 +11,6 @@ defineProps({
 </script>
 
 <template>
+    <PortfolioDocument :global="portfolio.global" />
     <PortfolioComposer :components="portfolio.components" />
 </template>
