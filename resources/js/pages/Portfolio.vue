@@ -12,5 +12,8 @@ defineProps({
 
 <template>
     <PortfolioDocument :global="portfolio.global" />
-    <PortfolioComposer :components="portfolio.components" />
+    <PortfolioComposer
+        :components="portfolio.components"
+        :global="portfolio.global"
+    />
 </template>

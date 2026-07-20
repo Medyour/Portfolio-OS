@@ -54,22 +54,48 @@ return [
 
     'components' => [
         'header' => [
-            'active' => false,
+            'active' => true,
             'order' => 10,
-            'brand_label' => null,
+            'brand_label' => 'Mohamed M’Kirchel',
             'show_logo' => false,
-            'navigation' => [],
-            'primary_cta' => null,
+            'navigation' => [
+                [
+                    'label' => 'Services',
+                    'target' => '#services',
+                ],
+                [
+                    'label' => 'Projets',
+                    'target' => '#projects',
+                ],
+                [
+                    'label' => 'À propos',
+                    'target' => '#about',
+                ],
+                [
+                    'label' => 'Contact',
+                    'target' => '#contact-form',
+                ],
+            ],
+            'primary_cta' => [
+                'label' => 'Me contacter',
+                'target' => '#contact-form',
+            ],
         ],
 
         'hero' => [
-            'active' => false,
+            'active' => true,
             'order' => 20,
-            'eyebrow' => null,
-            'headline' => null,
+            'eyebrow' => 'PHP/Laravel/Vue.js — SQL Server, API, automatisation',
+            'headline' => 'Transformer l’expertise et le réseau d’un professionnel en opportunités commerciales qualifiées.',
             'description' => null,
-            'primary_cta' => null,
-            'secondary_cta' => null,
+            'primary_cta' => [
+                'label' => 'Me contacter',
+                'target' => '#contact-form',
+            ],
+            'secondary_cta' => [
+                'label' => 'Voir mes projets',
+                'target' => '#projects',
+            ],
             'photo_override_url' => null,
             'photo_alt' => null,
         ],
