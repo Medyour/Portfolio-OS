@@ -84,7 +84,13 @@ final class PortfolioComposer
             fn (array $component): bool => $orderCounts[$component['order']] === 1,
         );
 
-        $components = $this->stabilizeComponents($components, $global);
+        $deferHeroContactFormDependency =
+            ($configuredComponents['contact_form']['active'] ?? null) !== true;
+        $components = $this->stabilizeComponents(
+            $components,
+            $global,
+            $deferHeroContactFormDependency,
+        );
 
         usort(
             $components,
@@ -864,11 +870,17 @@ final class PortfolioComposer
         return $label !== null && $target !== null ? compact('label', 'target') : null;
     }
 
-    private function stabilizeComponents(array $components, array $global): array
-    {
+    private function stabilizeComponents(
+        array $components,
+        array $global,
+        bool $deferHeroContactFormDependency,
+    ): array {
         do {
             $before = array_keys($components);
-            $components = $this->removeInvalidRequiredAnchors($components);
+            $components = $this->removeInvalidRequiredAnchors(
+                $components,
+                $deferHeroContactFormDependency,
+            );
             $components = $this->filterOptionalAnchors($components);
 
             if (isset($components['footer'])
@@ -887,24 +899,36 @@ final class PortfolioComposer
         return $components;
     }
 
-    private function removeInvalidRequiredAnchors(array $components): array
-    {
+    private function removeInvalidRequiredAnchors(
+        array $components,
+        bool $deferHeroContactFormDependency,
+    ): array {
         do {
             $invalid = [];
 
             foreach ($components as $type => $component) {
                 $action = match ($type) {
-                    'hero' => $component['primary_cta'],
-                    'contact_cta' => $component['primary_action'],
+                    'hero' => $component['primary_cta'] ?? null,
+                    'contact_cta' => $component['primary_action'] ?? null,
                     default => null,
                 };
                 $dependency = is_array($action)
                     ? self::ANCHORS[$action['target']] ?? null
                     : null;
 
-                if ($dependency !== null && ! isset($components[$dependency])) {
-                    $invalid[] = $type;
+                if ($dependency === null || isset($components[$dependency])) {
+                    continue;
                 }
+
+                if ($type === 'hero'
+                    && $dependency === 'contact_form'
+                    && $deferHeroContactFormDependency) {
+                    unset($components[$type]['primary_cta']);
+
+                    continue;
+                }
+
+                $invalid[] = $type;
             }
 
             foreach ($invalid as $type) {
