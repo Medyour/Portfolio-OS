@@ -2,6 +2,8 @@
 import { computed } from 'vue';
 import HeaderSection from './HeaderSection.vue';
 import HeroSection from './HeroSection.vue';
+import ProjectsSection from './ProjectsSection.vue';
+import ServicesSection from './ServicesSection.vue';
 
 const props = defineProps({
     components: {
@@ -46,8 +48,14 @@ const contentComponents = computed(() => components.value.filter((component) => 
                     :component="component"
                     :global="global"
                 />
-                <div v-else-if="component.type === 'services'" data-portfolio-component="services"></div>
-                <div v-else-if="component.type === 'projects'" data-portfolio-component="projects"></div>
+                <ServicesSection
+                    v-else-if="component.type === 'services'"
+                    :component="component"
+                />
+                <ProjectsSection
+                    v-else-if="component.type === 'projects'"
+                    :component="component"
+                />
                 <div v-else-if="component.type === 'about'" data-portfolio-component="about"></div>
                 <div v-else-if="component.type === 'testimonials'" data-portfolio-component="testimonials"></div>
                 <div v-else-if="component.type === 'contact_cta'" data-portfolio-component="contact_cta"></div>

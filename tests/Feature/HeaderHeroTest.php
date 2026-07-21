@@ -2,7 +2,11 @@
 
 function lotThreeConfiguration(): array
 {
-    return config('portfolio');
+    $configuration = config('portfolio');
+    $configuration['components']['services']['active'] = false;
+    $configuration['components']['projects']['active'] = false;
+
+    return $configuration;
 }
 
 function lotThreeValidContactForm(): array
