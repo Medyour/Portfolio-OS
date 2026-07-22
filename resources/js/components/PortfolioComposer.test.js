@@ -63,4 +63,39 @@ describe('PortfolioComposer', () => {
             expect(main.find(`[data-portfolio-component="${type}"]`).exists()).toBe(true);
         });
     });
+
+    test('renders Services before Projects in the composed content order', () => {
+        const wrapper = mount(PortfolioComposer, {
+            props: {
+                components: [
+                    {
+                        type: 'services',
+                        title: 'Services',
+                        items: [{
+                            title: 'Example service',
+                            description: 'Example service description.',
+                            benefit: 'Example service benefit.',
+                        }],
+                    },
+                    {
+                        type: 'projects',
+                        title: 'Projets',
+                        items: [{
+                            title: 'Example project',
+                            summary: 'Example project summary.',
+                            tags: ['Laravel', 'Vue.js'],
+                        }],
+                    },
+                ],
+            },
+        });
+        const renderedTypes = wrapper
+            .get('main')
+            .findAll('[data-portfolio-component]')
+            .map((component) => component.attributes('data-portfolio-component'));
+
+        expect(renderedTypes).toEqual(['services', 'projects']);
+        expect(wrapper.get('#services h2').text()).toBe('Services');
+        expect(wrapper.get('#projects h2').text()).toBe('Projets');
+    });
 });

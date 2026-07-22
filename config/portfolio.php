@@ -101,19 +101,34 @@ return [
         ],
 
         'services' => [
-            'active' => false,
+            'active' => true,
             'order' => 30,
-            'title' => null,
-            'intro' => null,
-            'items' => [],
+            'title' => 'Services',
+            'items' => [
+                [
+                    'title' => 'Site de crédibilité B2B',
+                    'description' => 'Création d’un site professionnel d’une page, adapté aux mobiles, présentant clairement votre promesse, vos services, vos preuves, votre présentation et un moyen de contact.',
+                    'benefit' => 'Aider vos prospects LinkedIn et vos recommandations à comprendre rapidement votre expertise et à passer plus facilement à la prise de contact.',
+                ],
+            ],
         ],
 
         'projects' => [
-            'active' => false,
+            'active' => true,
             'order' => 40,
-            'title' => null,
-            'intro' => null,
-            'items' => [],
+            'title' => 'Projets',
+            'items' => [
+                [
+                    'title' => 'Portfolio OS',
+                    'summary' => 'Projet de moteur configurable et réutilisable pour créer des portfolios professionnels d’une page, dont le portfolio de Mohamed constitue la première instance.',
+                    'tags' => [
+                        'Laravel',
+                        'Vue.js',
+                        'Inertia',
+                        'Tailwind CSS',
+                    ],
+                ],
+            ],
         ],
 
         'about' => [
