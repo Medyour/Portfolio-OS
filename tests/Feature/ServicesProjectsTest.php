@@ -19,7 +19,8 @@ test('it exposes the exact validated Services and Projects payload in configured
         'hero',
         'services',
         'projects',
-    ])->and(array_column($portfolio['components'], 'order'))->toBe([10, 20, 30, 40])
+        'about',
+    ])->and(array_column($portfolio['components'], 'order'))->toBe([10, 20, 30, 40, 50])
         ->and($components['services'])->toBe([
             'type' => 'services',
             'active' => true,
@@ -43,6 +44,7 @@ test('it exposes the exact validated Services and Projects payload in configured
         ])->and($components['header']['navigation'])->toBe([
             ['label' => 'Services', 'target' => '#services'],
             ['label' => 'Projets', 'target' => '#projects'],
+            ['label' => 'À propos', 'target' => '#about'],
         ])->and($components['hero']['secondary_cta'])->toBe([
             'label' => 'Voir mes projets',
             'target' => '#projects',
