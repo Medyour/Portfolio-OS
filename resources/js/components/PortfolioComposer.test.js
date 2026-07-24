@@ -64,7 +64,7 @@ describe('PortfolioComposer', () => {
         });
     });
 
-    test('renders Services before Projects in the composed content order', () => {
+    test('renders Services, Projects, and About in the composed content order', () => {
         const wrapper = mount(PortfolioComposer, {
             props: {
                 components: [
@@ -86,6 +86,12 @@ describe('PortfolioComposer', () => {
                             tags: ['Laravel', 'Vue.js'],
                         }],
                     },
+                    {
+                        type: 'about',
+                        title: 'À propos',
+                        summary: 'Example summary.',
+                        expertise: ['PHP'],
+                    },
                 ],
             },
         });
@@ -94,8 +100,24 @@ describe('PortfolioComposer', () => {
             .findAll('[data-portfolio-component]')
             .map((component) => component.attributes('data-portfolio-component'));
 
-        expect(renderedTypes).toEqual(['services', 'projects']);
+        expect(renderedTypes).toEqual(['services', 'projects', 'about']);
         expect(wrapper.get('#services h2').text()).toBe('Services');
         expect(wrapper.get('#projects h2').text()).toBe('Projets');
+        expect(wrapper.get('#about h2').text()).toBe('À propos');
+    });
+
+    test('does not render Testimonials when it is absent from the composed payload', () => {
+        const wrapper = mount(PortfolioComposer, {
+            props: {
+                components: [{
+                    type: 'about',
+                    title: 'À propos',
+                    summary: 'Example summary.',
+                }],
+            },
+        });
+
+        expect(wrapper.find('#testimonials').exists()).toBe(false);
+        expect(wrapper.find('[data-portfolio-component="testimonials"]').exists()).toBe(false);
     });
 });

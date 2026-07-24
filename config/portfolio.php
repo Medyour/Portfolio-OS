@@ -132,23 +132,24 @@ return [
         ],
 
         'about' => [
-            'active' => false,
+            'active' => true,
             'order' => 50,
-            'title' => null,
-            'summary' => null,
-            'details' => null,
-            'expertise' => [],
-            'highlights' => [],
-            'photo_override_url' => null,
-            'photo_alt' => null,
+            'title' => 'À propos',
+            'summary' => 'Développeur PHP, Laravel et Vue.js, avec une expérience en SQL Server, API et automatisation, je conçois des solutions web et de données adaptées aux besoins métier.',
+            'details' => 'Mon parcours réunit développement web, bases de données et automatisation. Je construis également Portfolio OS, un moteur configurable et réutilisable destiné à créer des portfolios professionnels d’une page, dont ce site constitue la première instance.',
+            'expertise' => [
+                'PHP',
+                'Laravel',
+                'Vue.js',
+                'SQL Server',
+                'API',
+                'Automatisation',
+            ],
         ],
 
         'testimonials' => [
             'active' => false,
             'order' => 60,
-            'title' => null,
-            'intro' => null,
-            'items' => [],
         ],
 
         'contact_cta' => [

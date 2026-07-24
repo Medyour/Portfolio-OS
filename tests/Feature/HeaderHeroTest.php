@@ -5,6 +5,7 @@ function lotThreeConfiguration(): array
     $configuration = config('portfolio');
     $configuration['components']['services']['active'] = false;
     $configuration['components']['projects']['active'] = false;
+    $configuration['components']['about']['active'] = false;
 
     return $configuration;
 }
